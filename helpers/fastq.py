@@ -40,3 +40,12 @@ def make_output_path(output_fastq: str) -> str:
 def write_read(file, filtered_read: list):
     for line in filtered_read:
         file.write(line + "\n")
+
+def read_file(input_file):
+    name = input_file.readline().strip()
+    if not name:
+        return 
+    seq = input_file.readline().strip()
+    plus = input_file.readline().strip()
+    quality = input_file.readline().strip()
+    return [name, seq, plus, quality]
