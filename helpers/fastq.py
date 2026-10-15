@@ -1,13 +1,17 @@
 def check_gc_bounds(seq: str, gc_bounds: tuple[float, float] | float) -> bool:
-    G_C_count = seq.count("G") + seq.count("C") 
-    G_C_percent = G_C_count / len(seq) * 100
-    if type(gc_bounds) is float:
-        return G_C_percent <= gc_bounds
-    return gc_bounds[0] <= G_C_percent <= gc_bounds[1]
+    if len(seq) == 0:
+        return False
+    gc_count = seq.count("G") + seq.count("C") 
+    gc_percent = gc_count / len(seq) * 100
+    if isinstance(gc_bounds, (int, float)):
+        return gc_percent <= gc_bounds
+    return gc_bounds[0] <= gc_percent <= gc_bounds[1] 
 
-seq = 'ACAGCAACATAAACATGATGGGATGGCGTAAGCCCCCGAGATATCAGTTTACCCAGGATAAGAGATTAAATTATGAGCAACATTATTAA'
+def check_gc_length(seq: str, length_bounds: tuple[float, float] | float) -> bool:
+    length = len(seq) 
+    if isinstance(length_bounds, (int, float)):
+        return length <= length_bounds
+    return length_bounds[0] <= length <= length_bounds[1]
 
-print(check_gc_bounds(seq, (15.0, 50.0)))
 
-
-#мы на вход хотим подавать последовательность нуклеотидов  
+#антихайп  
