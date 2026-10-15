@@ -37,18 +37,6 @@ def make_output_path(output_fastq: str) -> str:
         raise FileExistsError(f"Файл {output_path} уже существует")
     return output_path
 
-def write_read(file, filtered_read: str):
+def write_read(file, filtered_read: list):
     for line in filtered_read:
         file.write(line + "\n")
-
-
-
-
-
-
-
-
-
-    
-
-#мяу  
