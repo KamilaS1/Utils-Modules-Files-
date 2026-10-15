@@ -30,14 +30,16 @@ def check_quality_threshold(str_quality: str, quality_threshold: int | float) ->
     average_numbers = sum(numbers) / len(numbers)
     return average_numbers >= quality_threshold 
 
-def output_reads(output_fastq: str, filtered_reads: list):
+def make_output_path(output_fastq: str) -> str:
     os.makedirs("filtered", exist_ok=True)
-    output_path = os.path.join("filtered", output_fastq),
+    output_path = os.path.join("filtered", output_fastq)
     if os.path.isfile(output_path): 
-        with open(output_path, mode="w") as file:
-            for line in filtered_reads:
-                file.write(line + '\n')
+        raise FileExistsError(f"Файл {output_path} уже существует")
+    return output_path
 
+def write_read(file, filtered_read: str):
+    for line in filtered_read:
+        file.write(line + "\n")
 
 
 
