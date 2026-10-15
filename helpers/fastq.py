@@ -1,3 +1,5 @@
+import os 
+
 def check_gc_bounds(seq: str, gc_bounds: tuple[float, float] | float) -> bool:
     if len(seq) == 0:
         return False
@@ -8,21 +10,42 @@ def check_gc_bounds(seq: str, gc_bounds: tuple[float, float] | float) -> bool:
     return gc_bounds[0] <= gc_percent <= gc_bounds[1] 
 
 def check_length(seq: str, length_bounds: tuple[float, float] | float) -> bool:
+    if len(seq) == 0:
+        return False
     length = len(seq) 
     if isinstance(length_bounds, (int, float)):
         return length <= length_bounds
     return length_bounds[0] <= length <= length_bounds[1]
 
-def ascii_to_numbers(seq: str):
+def ascii_to_numbers(str_quality: str):
     numbers = []
-    for nucl in seq:
+    for nucl in str_quality:
         numbers.append(ord(nucl)-33)
     return numbers
 
-def check_quality_threshold(seq: str, quality_threshold: int | float):
-    numbers = ascii_to_numbers(seq)
+def check_quality_threshold(str_quality: str, quality_threshold: int | float) -> bool:
+    if len(str_quality) == 0:
+        return False
+    numbers = ascii_to_numbers(str_quality)
     average_numbers = sum(numbers) / len(numbers)
     return average_numbers >= quality_threshold 
+
+def output_reads(output_fastq: str, filtered_reads: list):
+    os.makedirs("filtered", exist_ok=True)
+    output_path = os.path.join("filtered", output_fastq),
+    if os.path.isfile(output_path): 
+        with open(output_path, mode="w") as file:
+            for line in filtered_reads:
+                file.write(line + '\n')
+
+
+
+
+
+
+
+
+
 
     
 
