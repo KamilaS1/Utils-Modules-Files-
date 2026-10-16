@@ -18,11 +18,11 @@ def filter_fastq(input_fastq,
                         fastq.write_read(output_file, reads)
 
 def convert_multiline_fasta_to_oneline(input_fasta: str, 
-                                       output_fasta:str = "output_seq"):
-    output_path = bio_files.make_output_path(output_fasta)
+                                       output_fasta: str | None = None):
+    output_path = bio_files.make_output_path(input_fasta, output_fasta)
     with open(input_fasta) as input_file, open(output_path, "w") as output_file:
         header = input_file.readline().strip()
         while header:
             seq, next_header = bio_files.get_next_seq(input_file)
-            bio_files.write_read(output_file, [header, seq]) 
+            bio_files.write_seq(output_file, [header, seq]) 
             header = next_header
