@@ -41,7 +41,7 @@ def write_read(file, filtered_read: list):
     for line in filtered_read:
         file.write(line + "\n")
 
-def read_file(input_file):
+def get_next_read(input_file):
     name = input_file.readline().strip()
     if not name:
         return 

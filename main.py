@@ -1,4 +1,5 @@
 from helpers import fastq
+from helpers import bio_files
 
 def filter_fastq(input_fastq, 
                  output_fastq, 
@@ -15,5 +16,13 @@ def filter_fastq(input_fastq,
                 if fastq.check_length(reads[1], length_bounds):
                     if fastq.check_quality_threshold(reads[3], quality_threshold):
                         fastq.write_read(output_file, reads)
-    output_file.close()
-    input_file.close()
+
+def convert_multiline_fasta_to_oneline(input_fasta: str, 
+                                       output_fasta:str = "output_seq"):
+    output_path = bio_files.make_output_path(output_fasta)
+    with open(input_fasta) as input_file, open(output_path, "w") as output_file:
+        header = input_file.readline().strip()
+        while header:
+            seq, next_header = bio_files.get_next_seq(input_file)
+            bio_files.write_read(output_file, [header, seq]) 
+            header = next_header
