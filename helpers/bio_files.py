@@ -45,8 +45,8 @@ def write_seq(file, filtered_read: list):
     Write a fasta record (header and sequence) to an opened file.
 
     Arguments:
-    output_file: file opened for writing
-    record: [header, sequence]
+    file: file opened for writing
+    filtered_read: [header, sequence]
 
     Returns None.
     """

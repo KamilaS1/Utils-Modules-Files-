@@ -44,7 +44,7 @@ def ascii_to_numbers(str_quality: str):
     Convert a quality string to numeric quality scores (phred33).
 
     Arguments:
-    quality: quality string of a read, one symbol per nucleotide
+    str_quality: quality string of a read, one symbol per nucleotide
 
     Returns a list of scores: ASCII code of each symbol minus 33.
     """
@@ -58,7 +58,7 @@ def check_quality_threshold(str_quality: str, quality_threshold: int | float) ->
     Check whether mean quality of a read is not below the threshold.
 
     Arguments:
-    quality: quality string of a read (phred33)
+    str_quality: quality string of a read (phred33)
     quality_threshold: minimal allowed mean quality
 
     Returns True if mean quality >= quality_threshold, else False.
@@ -93,8 +93,8 @@ def write_read(file, filtered_read: list):
     Write one read (4 lines) to an opened file.
 
     Arguments:
-    output_file: file opened for writing
-    read: [name, sequence, "+" line, quality]
+    file: file opened for writing
+    filtered_read: [name, sequence, "+" line, quality]
 
     Returns None.
     """
