@@ -52,3 +52,4 @@ def write_seq(file, filtered_read: list):
     """
     for line in filtered_read:
         file.write(line + "\n")
+        
